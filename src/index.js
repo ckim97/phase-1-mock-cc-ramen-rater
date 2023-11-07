@@ -11,11 +11,18 @@ document.addEventListener("DOMContentLoaded", function(){
                     let detailedImage = document.querySelector(".detail-image");
                     detailedImage.src = ramen.image;
 
-                   let name = document.querySelector("h2");
+                   let name = document.querySelector(".name");
                    name.textContent = ramen.name;
 
                    let restaurant = document.querySelector(".restaurant");
                    restaurant.textContent = ramen.restaurant;
+
+                    let rating = document.getElementById("rating-display");
+                    rating.textContent = ramen.rating;
+
+                    let comment = document.getElementById("comment-display");
+                    comment.textContent = ramen.comment;
+
                 });
             ramenContainer.append(image);
             };
@@ -37,3 +44,22 @@ formSubmission.addEventListener("submit", function(e){
 })
 
 
+
+document.addEventListener("DOMContentLoaded", function(){
+    let restaurants = [];
+    fetch("http://localhost:3000/ramens")
+        .then(response => response.json())
+        .then(data => function(){
+            for (let ramen of data) {
+                restaurants.push(ramen);
+            }
+            let detailedImage = document.querySelector(".detail-image");
+            detailedImage.src = restaurants[0].image;
+
+            let name = document.querySelector(".name");
+            name.textContent = restaurants[0].name;
+
+            let restaurant = document.querySelector(".restaurant");
+            restaurant.textContent = restaurants[0].restaurant;
+        })
+})
